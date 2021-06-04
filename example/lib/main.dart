@@ -10,8 +10,8 @@ import 'package:path_provider/path_provider.dart';
 
 typedef void OnError(Exception exception);
 
-const kUrl =
-    "https://www.mediacollege.com/downloads/sound-effects/nature/forest/rainforest-ambient.mp3";
+var kUrl = Uri.parse(
+    'https://www.mediacollege.com/downloads/sound-effects/nature/forest/rainforest-ambient.mp3');
 
 void main() {
   runApp(MaterialApp(home: Scaffold(body: AudioApp())));
@@ -121,7 +121,7 @@ class _AudioAppState extends State<AudioApp> {
     setState(() => playerState = PlayerState.stopped);
   }
 
-  Future<Uint8List> _loadFileBytes(String url, {OnError onError}) async {
+  Future<Uint8List> _loadFileBytes(Uri url, {OnError onError}) async {
     Uint8List bytes;
     try {
       bytes = await readBytes(url);
@@ -240,7 +240,9 @@ class _AudioAppState extends State<AudioApp> {
         Text(
           position != null
               ? "${positionText ?? ''} / ${durationText ?? ''}"
-              : duration != null ? durationText : '',
+              : duration != null
+                  ? durationText
+                  : '',
           style: TextStyle(fontSize: 24.0),
         )
       ]);
