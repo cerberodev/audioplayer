@@ -86,7 +86,7 @@ class _AudioAppState extends State<AudioApp> {
   }
 
   Future play() async {
-    await audioPlayer.play(kUrl);
+    await audioPlayer.play(kUrl.toString());
     setState(() {
       playerState = PlayerState.playing;
     });
@@ -157,7 +157,7 @@ class _AudioAppState extends State<AudioApp> {
           children: [
             Text(
               'Flutter Audioplayer',
-              style: textTheme.headline,
+              style: textTheme.headline5,
             ),
             Material(child: _buildPlayer()),
             if (!kIsWeb)
@@ -168,12 +168,12 @@ class _AudioAppState extends State<AudioApp> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () => _loadFile(),
                       child: Text('Download'),
                     ),
                     if (localFilePath != null)
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () => _playLocal(),
                         child: Text('play local'),
                       ),
@@ -252,7 +252,7 @@ class _AudioAppState extends State<AudioApp> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         if (!isMuted)
-          FlatButton.icon(
+          TextButton.icon(
             onPressed: () => mute(true),
             icon: Icon(
               Icons.headset_off,
@@ -261,7 +261,7 @@ class _AudioAppState extends State<AudioApp> {
             label: Text('Mute', style: TextStyle(color: Colors.cyan)),
           ),
         if (isMuted)
-          FlatButton.icon(
+          TextButton.icon(
             onPressed: () => mute(false),
             icon: Icon(Icons.headset, color: Colors.cyan),
             label: Text('Unmute', style: TextStyle(color: Colors.cyan)),
